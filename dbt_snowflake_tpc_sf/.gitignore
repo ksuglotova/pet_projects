@@ -1,3 +1,5 @@
+/.idea
 /dbt_packages
 /logs
 /target
+*.iml

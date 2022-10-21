@@ -3,6 +3,7 @@ version: 2
 sources:
   - name: tpch_sf10
     database: snowflake_sample_data
+    description: 'Snowflake [sample Data TPC-H](https://docs.snowflake.com/en/user-guide/sample-data-tpch.html)'
 
     tables:
       - name: customer

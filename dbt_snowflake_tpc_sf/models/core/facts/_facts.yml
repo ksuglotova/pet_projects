@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: customer_orders
+    description: 'Denormalized fact table of customer orders and order dimensions'
+    columns:
+      - name: pk
+        tests:
+          - unique
+
+  - name: customer_orders_supplies
+    description: 'Denormalized fact table of customer orders with received nomenclature details'
+    columns:
+      - name: pk
+        tests:
+          - unique
+
+  - name: supply_parts
+    description: 'Denormalized fact table of received supplies'
+    columns:
+      - name: pk
+        tests:
+          - unique
