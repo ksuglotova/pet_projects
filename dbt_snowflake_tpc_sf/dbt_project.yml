@@ -1,0 +1,59 @@
+# ======
+# Project Details
+# ======
+name: 'dbt_snowflake_tpc_sf'
+version: '2.0'
+config-version: 2
+profile: 'snowflake_sample'
+require-dbt-version: 1.2.1
+
+# ======
+# File Path Configs
+# ======
+model-paths: ["models"]
+test-paths: ["tests"]
+seed-paths: ["data"]
+macro-paths: ["macros"]
+analysis-paths: ["analysis"]
+target-path: "target"
+clean-targets:
+    - "target"
+    - "dbt_packages"
+
+# ======
+# Snowflake Configs
+# ======
+quoting:
+  database: false
+  identifier: false
+  schema: false
+
+# ======
+# Configs
+# ======
+seeds:
+  +enabled: true
+  +schema: intermediate
+
+models:
+  core:
+    +tags: true
+    +schema: core
+
+  staging:
+    +schema: staging
+    +tags: staging
+
+sources:
+  tpch_sf10:
+    +enabled: true
+
+
+snapshots:
+    +target_schema: snapshots
+
+tests:
+  +store_failures: true
+
+vars:
+  warehouse_name: 
