@@ -20,41 +20,45 @@ Again, because of homogeneous data we see pretty similar sale results across the
 ---
 ## Queries
 ### Yearly Sales
-
-`select
+```
+select
    extract('year', o_orderdate) as display_year
  , sum(coalesce(l_extendedprice, 0) * coalesce(l_quantity, 0) - coalesce(l_discount, 0)) as sales_amount
 from customer_orders_supplies
 where l_returnflag = 'N'
-group by 1`
+group by 1
+```
 
 ### Best selling manufacturers
-
-`select
+```
+select
    c.p_mfgr
  , sum(coalesce(c.l_quantity, 0)) as sales_quantity
 from customer_orders_supplies c
 where c.l_shipmode in ('AIR', 'MAIL')
 group by 1
-order by 2 desc`
+order by 2 desc
+```
 
 ### Average time to ship by year
-
-`select
+```
+select
    extract('year', o_orderdate) as display_year
  , l_returnflag  
  , avg(datediff('day', o_orderdate, l_shipdate)) as avg_ship_date
 from customer_orders_supplies
 where extract('year', o_orderdate) >= 1995
-group by 1, 2`
+group by 1, 2
+```
 
 ### Sales by Regions in 1996
-
-`select
+```
+select
    r.r_name as region_name
  , sum(coalesce(c.l_quantity, 0) * coalesce(c.p_retailprice, 0)) as sales_amount
 from customer_orders_supplies c
 inner join stg_region r
   on r.r_regionkey = c.n_regionkey
 where date_trunc('year', c.o_orderdate) = '1996-01-01'
-group by 1`
+group by 1
+```
