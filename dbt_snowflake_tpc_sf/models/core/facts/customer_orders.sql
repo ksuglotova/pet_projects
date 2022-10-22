@@ -4,6 +4,7 @@ SELECT
   {{ dbt_utils.surrogate_key(['c.c_custkey', 'o.o_orderkey', 'li.l_linenumber']) }} AS pk
 , c.c_custkey
 , c.c_nationkey
+, n.n_regionkey
 , SPLIT_PART(c.c_phone, '-', 1) AS phone_area_code
 , o.o_orderkey
 , o.o_orderstatus
@@ -28,3 +29,5 @@ INNER JOIN {{ ref('stg_orders') }} o
   ON c.c_custkey = o.o_custkey
 INNER JOIN {{ ref('stg_lineitem') }} li
   ON o.o_orderkey = li.l_orderkey
+LEFT JOIN {{ ref('stg_nation') }} n
+  ON c.c_nationkey = n.n_nationkey
