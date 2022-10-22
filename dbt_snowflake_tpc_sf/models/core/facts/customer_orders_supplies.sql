@@ -4,6 +4,7 @@ select
   {{ dbt_utils.surrogate_key(['c.c_custkey', 'c.o_orderkey', 'c.l_linenumber']) }} AS pk
 , c.c_custkey
 , c.c_nationkey
+, c.n_regionkey
 , c.phone_area_code AS c_phone_area_code
 , c.o_orderkey
 , c.o_orderstatus
